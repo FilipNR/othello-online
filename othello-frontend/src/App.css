@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+}
+
+body {
+  background-image: url("./static/App-background.jpg");
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.App h1 {
+  color: white;
+  opacity: 0.8;
+  align-self: center;
+  margin: 0.5em;
+}
+
+.lobbyStart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15em;
+}
+
+.lobbyStart div {
+  display: flex;
+  background: linear-gradient(to bottom, #3c3934, #33312e 100%);
+  color: #ccc;
+  justify-content: center;
+  margin: 1em;
+  width: 40%;
+  padding: 1em 0;
+}
