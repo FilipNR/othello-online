@@ -1,14 +1,10 @@
-import { Game } from 'othello.js';
-
 interface matchInstance {
     [id: string]: {
         roomName: string,
         roomId: string,
+        white: string,
         gameStarted: boolean,
-        black: string,
-        white?: string,
-        blacksTurn?: boolean,
-        game?: Game
+        black?: string,
     }
 }
 

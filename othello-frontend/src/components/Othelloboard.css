@@ -5,3 +5,25 @@
   width: 801px;
   height: 801px;
 }
+
+.othello {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+}
+
+.othello button {
+  background-color: #333;
+  color: white;
+  min-width: 10em;
+  padding: 1em;
+}
+
+.btnContainer {
+  float: left;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}

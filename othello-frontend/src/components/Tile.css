@@ -22,12 +22,12 @@
   background: black;
 }
 
-.nones {
+.none {
   display: none;
 }
 
-.none.ableToPut {
-  display: display;
+.ableToPut {
+  display: inline;
   border-radius: 100%;
   height: 15px;
   width: 15px;

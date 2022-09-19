@@ -32,10 +32,45 @@ body {
 
 .lobbyStart div {
   display: flex;
+  border-radius: 0.5em;
   background: linear-gradient(to bottom, #3c3934, #33312e 100%);
   color: #ccc;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
   margin: 1em;
-  width: 40%;
+  width: 50%;
   padding: 1em 0;
+}
+
+.lobbyStart div > * {
+  margin: 0 1em;
+}
+
+.lobbyStart span {
+  display: flex;
+  background: linear-gradient(to bottom, #3c3934, #33312e 100%);
+  padding: 0.5em 1em;
+  color: #ccc;
+  width: 30em;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.join {
+  background: #2f2e19;
+  width: 7zem;
+  color: #9b9b9b;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+}
+
+div input {
+  --outline-color: var(--color-primary);
+  background-color: var(--color-background-alt);
+  border: 2px solid;
+  border-radius: 4px;
+  color: var(--color-on-background);
+  font: inherit;
+  padding: 0 0.5em;
+  width: 50%;
 }

@@ -4,29 +4,30 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import routes from './routes';
 import cors from 'cors';
-// import socket from './socket';
 import { socketioController } from './controller/socketio.controller';
 
 const app = express();
 const server = createServer(app);
 
 app.use(cors());
+const origin_url = config.get<string>('cors_origin');
 
 const io = new Server(server, { 
-        cors: {
-            origin: "*"
-        },
-    });
-
-const port = config.get<number>('port')
-
-server.listen(3002, () => {
-  console.log('Listening on port', 3001)
+  cors: {
+    origin: origin_url,
+    methods: ["GET", "POST"]
+  }
 });
 
-app.listen(port, () => {
-  console.log("Server is listening on port ", port);
+const express_port = config.get<number>('express_port');
+const socket_port = config.get<number>('socket_port');
 
+server.listen(socket_port, () => {
+  console.log('Listening on port', socket_port);
+});
+
+app.listen(express_port, () => {
+  console.log("Server is listening on port ", express_port);
   routes(app)
 });
 

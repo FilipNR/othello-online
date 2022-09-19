@@ -1,43 +1,30 @@
 import './App.css';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { SocketContext, socket } from './context/socket';
-import {  Link } from "react-router-dom";
-import { nanoid } from 'nanoid';
-import Othelloboard from './components/Othelloboard';
+import { Link, useNavigate } from "react-router-dom";
+import { handleDisconnect, handleLeave } from './utils/rootSocketHandlers';
 
 function App() {
-  const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
-  const [inRoom, setInRoom] = useState<boolean>(false);
-  const [move, setMove] = useState<object>({})
-  const [lastPong, setLastPong] = useState(null);
-  const client = useRef<any>();
+  const navigate = useNavigate();
   
   useEffect(() => {
-    socket.on('connect', () => {
-      setIsConnected(true);
-    });
+    socket.on('disconnect', () => handleDisconnect(navigate));
 
-    socket.on('disconnect', () => {
-      setIsConnected(false);
-    });
-
-    client.current = socket;
+    socket.on('leave room', () => handleLeave(navigate));
 
     return () => {
-      socket.off('connect');
-      socket.off('disconnect')
+      socket.off('disconnect');
+      socket.off('leave room');
     }
+    // eslint-disable-next-line
   }, []);
 
-  const userId = nanoid();
-  localStorage.roomName = 'room 1'
-  if (!localStorage.userId) {
-    localStorage.userId = userId; // Generate a unique userId and push it to localStorage
-  }
-  
-  const createRoom = () => {
-    socket.emit('create room', localStorage);
-  }
+  useEffect(() => {
+    if (localStorage.roomId) {
+      navigate(`/room/${localStorage.roomId}`);
+    }
+    // eslint-disable-next-line
+  }, [localStorage.roomId])
 
   return (
     <SocketContext.Provider value={socket} >
@@ -49,24 +36,8 @@ function App() {
           <div><Link to="/create">Create game</Link></div>
         </div>
       </div>
-      {/* <Outlet /> */}
     </SocketContext.Provider>  
   );
-  // return (
-  //   <div className="App">
-  //     <h1>Othello</h1>
-  //     <div className='lobbyStart'>
-  //       <div>Join game</div>
-  //       <div>Create game</div>
-  //       <div>Rules</div>
-  //     </div>
-  //   </div>
-  // );
-  // <div>
-  //       <p onClick={() => console.log(client)}>Connected: {'' + isConnected}</p>
-  //       <button onClick={createRoom}>AAA</button>
-  //     </div>
-  //     <Othelloboard setMove={setMove} />
 }
 
 export default App;
